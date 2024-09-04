@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 8000;
 
 // Use the cors middleware with specific origin or allow all origins
 app.use(cors({
-    origin: 'http://localhost:3001', // Replace with your frontend's origin
+    origin: ['http://localhost:3001' , 'https://learnium.coolify.top/'], // Replace with your frontend's origin
     methods: 'GET,POST',             // Allow specific methods
     allowedHeaders: 'Content-Type',  // Allow specific headers
 }));
