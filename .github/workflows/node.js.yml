@@ -14,8 +14,8 @@ jobs:
         node-version: [20.x]
 
     steps:
-    # - name: Change ownership of work directory
-    #   run: sudo chown -R $USER:$USER /home/ubuntu/actions-runner/_work/coolify-backend/coolify-backend
+    - name: Change ownership of work directory
+      run: sudo chown -R $USER:$USER /home/ubuntu/actions-runner/_work/genkit-backend/genkit-backend
 
     - uses: actions/checkout@v3
 
