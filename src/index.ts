@@ -10,7 +10,10 @@ app.use(express.json());
 const PORT = process.env.PORT || 8000;
 
 app.use(cors({
-    origin: ['http://localhost:3001', 'https://learnium.coolify.top', 'https://learnium.coolify.top/ai/apti'],
+    origin: ['http://localhost:3001', 
+        'http://localhost:3000',
+        'https://learnium.coolify.top',
+         'https://learnium.coolify.top/ai/apti'],
     methods: 'GET,POST,OPTIONS',
     allowedHeaders: 'Content-Type',
 }));
