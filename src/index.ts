@@ -97,7 +97,8 @@ app.post('/resultoa', async (req, res) => {
             let result = await callOaResultFlow(dataString);
 
             // Process the result
-            result = result.trim().replace(/^```json|```$/g, '');
+            result = result.trim().replace(/^```json|```$/g, '');3
+            
 
             // Parse the result to JSON if needed
             const parsedRes = JSON.parse(result);
