@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "npx nodemon",
     "build": "npm i && tsc",
-    "start": "node build/index.js",
+    "start": "node lib/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "name": "genkit-backend",
