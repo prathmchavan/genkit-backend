@@ -15,10 +15,19 @@ app.use(cors({
         'http://localhost:3000',
         'https://learnium.coolify.top',
         'https://learnium.coolify.top/ai/apti',
-        "https://api.learnium.coolify.top/reel"
     ],
     methods: ["GET", "HEAD", "OPTIONS", "POST", "PUT", "DELETE"],
-    allowedHeaders: 'Content-Type',
+    allowedHeaders: [
+        "Origin",
+        "X-Requested-With",
+        "Content-Type",
+        "Accept",
+        "x-client-key",
+        "x-client-token",
+        "x-client-secret",
+        "Authorization",
+        "Accept"
+    ]
 }));
 
 
