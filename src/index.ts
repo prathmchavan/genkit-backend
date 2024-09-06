@@ -11,10 +11,10 @@ app.use(express.json());
 const PORT = process.env.PORT || 8000;
 const uri = process.env.URI
 app.use(cors({
-    origin: ['http://localhost:3001',
+    origin: [
+        'http://localhost:3001',
         'http://localhost:3000',
-        'https://learnium.coolify.top',
-        'https://learnium.coolify.top/ai/apti',
+        'https://learnium.coolify.top'
     ],
     methods: ["GET", "HEAD", "OPTIONS", "POST", "PUT", "DELETE"],
     allowedHeaders: [
@@ -25,9 +25,9 @@ app.use(cors({
         "x-client-key",
         "x-client-token",
         "x-client-secret",
-        "Authorization",
-        "Accept"
-    ]
+        "Authorization"
+    ],
+    credentials: true,  // Allow credentials if needed
 }));
 
 
