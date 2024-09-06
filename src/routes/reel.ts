@@ -6,7 +6,7 @@ import { createReel, getIsLiked, getReel, getReels, toggleLike } from "../contro
 const router = Router();
 
 router.post("/",  createReel);
-router.get("/collection",  getSelection)
+// router.get("/collection",  getSelection)
 router.get("/", getReels);
 router.put("/like/:id",  toggleLike)
 router.get("/:id/likes",  getIsLiked)
