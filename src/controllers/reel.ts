@@ -147,6 +147,6 @@ export const getIsLiked = async (req: Request, res: Response) => {
 
 //         return res.status(200).json({ message: "Collection fetched!", collection });
 //     } catch (error) {
-//         next(error);
+//         throw new Error(String(error))   
 //     }
 // };
