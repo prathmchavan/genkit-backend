@@ -105,9 +105,9 @@ const resultFlow = defineFlow(
         1. Total number of questions.
         2. Number of correct answers .
         3. Number of incorrect answers .
-        4. Score as a percentage .
-        5. A brief feedback message based on the score . 
-        6. Create answersheet in that show user answer and correct answer.
+        4. Score as a percentage but it should not be float value it should be absolute value .
+        5. A brief feedback message based on the score which should have top strength and areas of improvement , in top strength show which topic or topic is strong and in areas of improvement tell user about the weak areas or weak point which should user focus to improve on . 
+        6. Create answersheet it should have question , user answer and correct answer .
         format of above should be followed by below format :
         {
           "reportCard": {
@@ -115,12 +115,16 @@ const resultFlow = defineFlow(
           "correctAnswers": 1,
           "incorrectAnswers": 9,
           "score": 1,
-          "feedback": "You answered 1 out of 10 questions correctly. Keep practicing and you'll improve!"  
+          "feedback": {
+            "strengths":"Your logical reasoing is good",
+            "improvements":"focus on math"
+          } 
         },
           "answerSheet": 
      [
        {
           "questionId": 1,
+          "question":"this is question",
           "userAnswer": "a",
           "correctAnswer": "a"
         }
