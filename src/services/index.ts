@@ -35,49 +35,55 @@ const questionGenerationFlow = defineFlow(
   async (subject) => {
     // Construct a request and send it to the model API.
     const llmResponse = await generate({
-      prompt: `Generate exactly 3 multiple-choice aptitude questions for the ${subject} difficulty level. Each question should adhere to the following structure:
+      prompt: `Generate exactly 3 unique, multiple-choice aptitude questions for the difficulty level: ${subject}. Ensure questions cover a variety of topics and adhere to the following structure:
 
 [
   {
     "id": 1,
-    "text": "What is the capital of France?",
+    "text": "Question text goes here",
     "options": [
-      { "id": "a", "text": "Berlin" },
-      { "id": "b", "text": "Madrid" },
-      { "id": "c", "text": "Paris" },
-      { "id": "d", "text": "Rome" }
+      { "id": "a", "text": "Option A" },
+      { "id": "b", "text": "Option B" },
+      { "id": "c", "text": "Option C" },
+      { "id": "d", "text": "Option D" }
     ],
     "correctAnswer": "c"
   },
   {
     "id": 2,
-    "text": "If a train travels at 60 miles per hour, how far will it travel in 3 hours?",
+    "text": "Second question text goes here",
     "options": [
-      { "id": "a", "text": "120 miles" },
-      { "id": "b", "text": "180 miles" },
-      { "id": "c", "text": "240 miles" },
-      { "id": "d", "text": "300 miles" }
+      { "id": "a", "text": "Option A" },
+      { "id": "b", "text": "Option B" },
+      { "id": "c", "text": "Option C" },
+      { "id": "d", "text": "Option D" }
     ],
-    "correctAnswer": "b"
+    "correctAnswer": "a"
   },
   {
     "id": 3,
-    "text": "What is the next number in the sequence: 2, 4, 6, 8, ...?",
+    "text": "Third question text goes here",
     "options": [
-      { "id": "a", "text": "10" },
-      { "id": "b", "text": "12" },
-      { "id": "c", "text": "14" },
-      { "id": "d", "text": "16" }
+      { "id": "a", "text": "Option A" },
+      { "id": "b", "text": "Option B" },
+      { "id": "c", "text": "Option C" },
+      { "id": "d", "text": "Option D" }
     ],
-    "correctAnswer": "a"
+    "correctAnswer": "b"
   }
 ]
-1.Ensure each question has a unique id.
-2.The text field should be the question itself.
-3.The options array must contain four choices, each with a unique id ('a', 'b', 'c', 'd') and corresponding text.
-4.The correctAnswer field should match the id of the correct option.
-5. The output must be a valid JSON array following the structure provided.
- Please respond only with the JSON format as specified above without any additional explanations or characters..`,
+
+Guidelines:
+1. Each question must have a unique id.
+2. The "text" field must contain the question.
+3. The "options" array must provide four unique choices, each with an id ('a', 'b', 'c', 'd').
+4. The correct answer must be indicated in the "correctAnswer" field and match one of the option ids.
+5. Ensure diversity in question topics across subjects and difficulty levels.
+6. Minimize repetition of questions or topics across multiple generations.
+7. The output must be in valid JSON format.
+
+Please provide only the JSON output without additional explanations or characters.
+`,
       model: gemini15Flash,
       config: {
         temperature: 1,
@@ -131,7 +137,7 @@ const resultFlow = defineFlow(
       ]
         
         the user answers and question set is in : ${subject}
-        Give me the above response in json formate and don't provide me your e **Explanation:** ,i just want the above respons json response.
+        Give me the above response in json formate and don't provide me your **Explanation:** ,i just want the above respons json response.
         `,
       model: gemini15Flash,
       config: {
@@ -233,13 +239,13 @@ export async function callQuestionGenerationFlow(difficulty: string) {
   // Invoke the flow. The value you pass as the second parameter must conform to
   // your flow's input schema.
   try {
-    
+
     const flowResponse = await runFlow(questionGenerationFlow, difficulty);
     console.log(flowResponse);
     return flowResponse;
-  } catch (error:any) {
+  } catch (error: any) {
     throw new Error(error.message)
-  } 
+  }
 }
 
 export async function callOaQuestionGenerationFlow(difficulty: string) {
