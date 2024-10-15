@@ -1,15 +1,17 @@
 import express, { Application } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import router from "./routes";
+import router from "./routes"; 
 import mongoose from "mongoose";
 
 const app: Application = express();
-dotenv.config({ path: '.env.local' });
-app.use(express.json());
+dotenv.config({ path: '.env.local' }); 
+
+app.use(express.json()); 
 
 const PORT = process.env.PORT || 8000;
-const uri = process.env.URI
+const uri = process.env.URI; 
+
 app.use(cors({
     origin: [
         'http://localhost:3001',
@@ -27,29 +29,33 @@ app.use(cors({
         "x-client-secret",
         "Authorization"
     ],
-    credentials: true,
+    credentials: true, 
 }));
 
 app.use("/", router);
+
 if (uri) {
-    mongoose.connect(uri, {
-        serverSelectionTimeoutMS: 5000, 
-        socketTimeoutMS: 45000,      
-    });
-    mongoose.connection.on('connected', () => {
-        console.log('Mongoose connected to MongoDB');
-    });
-    
-    mongoose.connection.on('error', (err) => {
-        console.log(`Mongoose connection error: ${err}`);
-    });
-    
+    const connectToDatabase = async () => {
+        try {
+            await mongoose.connect(uri, {
+                serverSelectionTimeoutMS: 5000,
+                socketTimeoutMS: 45000,
+            });
+            console.log('Mongoose connected to MongoDB');
+        } catch (err) {
+            console.error(`Mongoose connection error: ${err}`);
+        }
+    };
+
+    connectToDatabase(); // Call the function to initiate the connection
+
     mongoose.connection.on('disconnected', () => {
         console.log('Mongoose disconnected');
     });
-    
-    
+} else {
+    console.error("MongoDB URI is not defined in the environment variables.");
 }
+
 app.listen(PORT, () => {
-    console.log(`Server is live on ${PORT}`);
+    console.log(`Server is live on port ${PORT}`);
 });

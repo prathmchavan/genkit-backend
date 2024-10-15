@@ -44,7 +44,6 @@ export const getReel = async (req: Request, res: Response) => {
 // Get multiple reels with pagination
 export const getReels = async (req: Request, res: Response) => {
     const { limit = 10, offset = 0 } = req.query;
-
     try {
         const reels = await Reel.find()
             .limit(Number(limit))
