@@ -5,7 +5,7 @@ import router from "./routes";
 import mongoose from "mongoose";
 
 const app: Application = express();
-dotenv.config({ path: '.env.local' }); 
+dotenv.config({ path: '.env' }); 
 
 app.use(express.json()); 
 
