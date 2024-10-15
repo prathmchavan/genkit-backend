@@ -27,11 +27,9 @@ app.use(cors({
         "x-client-secret",
         "Authorization"
     ],
-    credentials: true,  // Allow credentials if needed
+    credentials: true,
 }));
 
-
-//initialize router
 app.use("/", router);
 if (uri) {
     connectDB(uri);
