@@ -2,7 +2,7 @@ import express, { Application } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import router from "./routes";
-import { connectDB } from "@microproj/mongodb-connector";
+import mongoose from "mongoose";
 
 const app: Application = express();
 dotenv.config({ path: '.env.local' });
@@ -32,7 +32,23 @@ app.use(cors({
 
 app.use("/", router);
 if (uri) {
-    connectDB(uri);
+    mongoose.connect(uri, {
+        serverSelectionTimeoutMS: 5000, 
+        socketTimeoutMS: 45000,      
+    });
+    mongoose.connection.on('connected', () => {
+        console.log('Mongoose connected to MongoDB');
+    });
+    
+    mongoose.connection.on('error', (err) => {
+        console.log(`Mongoose connection error: ${err}`);
+    });
+    
+    mongoose.connection.on('disconnected', () => {
+        console.log('Mongoose disconnected');
+    });
+    
+    
 }
 app.listen(PORT, () => {
     console.log(`Server is live on ${PORT}`);
